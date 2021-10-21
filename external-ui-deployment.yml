@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: events-external
+  name: events-external
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: events-external
+  template:
+    metadata:
+      labels:
+        app: events-external
+    spec:
+      containers:
+      - image: rkreber/external-image:v0.2.0 #change image
+        name: external-container
+        imagePullPolicy: "Always"
+        env:
+        - name: SERVER
+          value: "http://events-internal"

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: events-internal
+  name: events-internal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: events-internal
+  template:
+    metadata:
+      labels:
+        app: events-internal
+    spec:
+      containers:
+      - image: rkreber/internal-image:v0.1 #change image
+        name: internal-container
+        imagePullPolicy: "Always"
